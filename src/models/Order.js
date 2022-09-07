@@ -22,6 +22,25 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: true,
             field: 'supervisor_id',
         },
+
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            field: 'created_at',
+        },
+
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            field: 'updated_at',
+        },
+
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            field: 'deleted_at'
+        }
+
     },
     {
         tableName: 'orders',
