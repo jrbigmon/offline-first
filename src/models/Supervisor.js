@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING(200),
             allowNull: false
-          },
+        },
     
-          email: {
+        email: {
             type: DataTypes.STRING(200),
             allowNull: false,
             unique: true
-          },
+        },
     
-          password: {
+        password: {
             type: DataTypes.STRING(400),
             allowNull: false,
-          }
+        }
     }, 
     {
         tableName: 'supervisors',
