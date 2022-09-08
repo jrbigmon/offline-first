@@ -1,8 +1,8 @@
-const SupervisorCreate = (props) => {
+const SupervisorCreate = (name, email, password) => {
     const supervisor = {
-        name: props.name,
-        email: props.email,
-        password: props.password
+        name,
+        email,
+        password
     }
     return supervisor
 }
