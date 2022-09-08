@@ -1,17 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const routerFile = path.resolve('src', 'stagedProcess', 'orderInStaged.json')    
-const open = () => {
-    let content = fs.readFileSync(routerFile, 'utf8');
-    const orders = JSON.parse(content);
-    return orders;
-}
-
-const store = (db) => {
-  const content = JSON.stringify(db, null, 4);
-  fs.writeFileSync(routerFile, content, 'utf8');
-}
+const fileManipulate = require('./fileManipulate')
 
 const orderOnHold = (props) => {
     const { date, geolocation, supervisorId } = props
@@ -19,17 +6,18 @@ const orderOnHold = (props) => {
     const newOrder = { 
         date,
         geolocation,
-        supervisorId
+        supervisorId: parseInt(supervisorId)
     }
 
-    const ordersOld = open()
+    const ordersOld = fileManipulate.open()
 
-    if(ordersOld.length > 0) {
-        ordersOld.push(newOrder)
-        store(ordersOld)
-    } else {
-        store(newOrder)
-    }
+    ordersOld.push(newOrder)
+    
+    fileManipulate.store(ordersOld)
+   
+    const orderAfterStagedAdd = fileManipulate.open()
+
+    return orderAfterStagedAdd
 }
 
 module.exports = orderOnHold
