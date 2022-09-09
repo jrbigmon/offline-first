@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     })
     Supervisor.associate = (models) => {
         Supervisor.hasMany(models.Order, {
-            foreignKey: 'supervisor_id',
+            foreignKey: 'supervisorId',
             as: 'orders'
         })
     }

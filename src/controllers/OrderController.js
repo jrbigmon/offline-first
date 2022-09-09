@@ -24,10 +24,18 @@ const OrderController = {
     
     getOrders: async (req, res) => {
         try {
-            const orders = await Order.findAll()
+            const orders = await Order.findAll({
+                include: [
+                    {
+                        association: 'supervisor',
+                        attributes: ['name']
+                    }
+                ]
+            })
             return res.status(200).json(orders)
         } catch (err) {
-            return res.status(500).json("Server out!")
+            console.log(err)
+            return res.status(500).json(err)
         }
     }
 }
