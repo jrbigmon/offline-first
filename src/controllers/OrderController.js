@@ -10,7 +10,7 @@ const OrderController = {
 
             const orderAfterCreate = await Order.create(newOrder)
 
-            return res.json(orderAfterCreate)
+            return res.status(201).json(orderAfterCreate)
         } catch (err) {
             const { geolocation, supervisorId } = req.body
                 
@@ -18,12 +18,17 @@ const OrderController = {
 
             const orderAfterStagedAdd = orderOnHold(newOrder)
                 
-            return res.json(orderAfterStagedAdd)
+            return res.status(201).json(orderAfterStagedAdd)
         }
     },
     
     getOrders: async (req, res) => {
-
+        try {
+            const orders = await Order.findAll()
+            return res.status(200).json(orders)
+        } catch (err) {
+            return res.status(500).json("Server out!")
+        }
     }
 }
 
